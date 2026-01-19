@@ -150,29 +150,43 @@
   top: 6rem;
   background: #E4ABEE;
   color: #111;
-  padding: 12px 28px;
+  padding: 10px 32px;
   border-radius: 999px;
-  font-size: clamp(15px, 1.2vw, 14px);
+  font-size: clamp(13px, 1.2vw, 14px);
   display: inline-flex;
   align-items: center;
   white-space: nowrap; /* keep text on one line */
   width: auto; /* size to content */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  opacity: 0;
+  transform: translateX(150px) scale(0.995);
+  animation: slideLeftFade 1200ms cubic-bezier(.2,.9,.3,1) 2500ms forwards;
+  will-change: transform, opacity;
 }
 
 .badge .badge-arrow {
   position: absolute;
-  left: -16px;
+  left: -14px;
   top: 0;
   transform: translateY(-50%) rotate(-95deg);
   width: 18px;
-  height: 18px;
+  height: 16px;
   display: block;
   color: #E4ABEE;
 }
 .badge .badge-arrow svg, .badge .badge-arrow path { fill: currentColor; }
 
 .badge span { display: inline-block; }
+
+@keyframes slideLeftFade {
+  from {
+    opacity: 0;
+    transform: translateX(150px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
 
 .hero-subtitle {
   font-weight: 700;
