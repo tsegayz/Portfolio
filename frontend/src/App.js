@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from 'react';
-import { FaLocationArrow } from 'react-icons/fa';
-import './App.css';
+import React, { useEffect, useRef } from "react";
+import { FaLocationArrow } from "react-icons/fa";
+import "./App.css";
 
 function App() {
   const navItems = [
-    'TSEGA YAEKOB',
-    'CONTACTS',
-    '', // middle empty item
-    'WORK',
-    'SOCIALS'
+    "TSEGA YAEKOB",
+    "CONTACTS",
+    "", // middle empty item
+    "WORK",
+    "SOCIALS",
   ];
 
   // refs for positioning subtitle relative to title
@@ -25,12 +25,12 @@ function App() {
 
       // On narrow viewports let subtitle flow under the title
       if (window.innerWidth <= 900) {
-        subtitle.style.position = 'static';
-        subtitle.style.left = '';
-        subtitle.style.top = '';
-        subtitle.style.transform = '';
-        subtitle.style.zIndex = '';
-        title.style.zIndex = '';
+        subtitle.style.position = "static";
+        subtitle.style.left = "";
+        subtitle.style.top = "";
+        subtitle.style.transform = "";
+        subtitle.style.zIndex = "";
+        title.style.zIndex = "";
         return;
       }
 
@@ -38,21 +38,22 @@ function App() {
       const titleRect = title.getBoundingClientRect();
 
       // place subtitle roughly under the title using a direct left offset
-      const left = titleRect.left - heroRect.left + Math.round(titleRect.width * 0.3);
-      const top = titleRect.bottom - heroRect.top + 8;
+      const left =
+        titleRect.left - heroRect.left + Math.round(titleRect.width * 0.3);
+      const top = titleRect.bottom - heroRect.top;
 
-      subtitle.style.position = 'absolute';
+      subtitle.style.position = "absolute";
       subtitle.style.left = `${Math.max(8, left)}px`;
       subtitle.style.top = `${top}px`;
-      subtitle.style.transform = '';
-      subtitle.style.zIndex = '50';
-      title.style.zIndex = '10';
+      subtitle.style.transform = "";
+      subtitle.style.zIndex = "50";
+      title.style.zIndex = "10";
     }
 
     // initial placement and on resize
     updatePosition();
-    window.addEventListener('resize', updatePosition);
-    return () => window.removeEventListener('resize', updatePosition);
+    window.addEventListener("resize", updatePosition);
+    return () => window.removeEventListener("resize", updatePosition);
   }, []);
 
   return (
@@ -63,9 +64,9 @@ function App() {
             {navItems.map((label, idx) => (
               <li
                 key={idx}
-                className={`nav-item ${label === '' ? 'empty' : ''}`}
+                className={`nav-item ${label === "" ? "empty" : ""}`}
               >
-                {label === '' ? (
+                {label === "" ? (
                   <a href="#" aria-hidden="true"></a>
                 ) : (
                   <a href="#">{label}</a>
@@ -77,13 +78,40 @@ function App() {
       </header>
       <main className="hero" ref={heroRef}>
         <div className="title-wrap">
-          <h1 className="hero-title title-creative" ref={titleRef}>Creative</h1>
+          <h1 className="hero-title title-creative" ref={titleRef}>
+            Creative
+          </h1>
           <div className="badge">
-            <FaLocationArrow className="badge-arrow" aria-hidden="true" focusable="false" />
+            <FaLocationArrow
+              className="badge-arrow"
+              aria-hidden="true"
+              focusable="false"
+            />
             <span>Visual Designer</span>
           </div>
         </div>
-        <h2 className="hero-subtitle title-designer" ref={subtitleRef}>Designer</h2>
+        <h2 className="hero-subtitle title-designer" ref={subtitleRef}>
+            Designer
+          </h2>
+        <div className="subtitle-wrap">
+          <div className="badge badge-top second">
+            <FaLocationArrow
+              className="badge-arrow"
+              aria-hidden="true"
+              focusable="false"
+            />
+            <span>Developer</span>
+          </div>
+          
+          <div className="badge badge-bottom second">
+            <FaLocationArrow
+              className="badge-arrow"
+              aria-hidden="true"
+              focusable="false"
+            />
+            <span>UI/UX Designer</span>
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -53,19 +53,21 @@
 }
 
 .nav-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr auto 1fr 1fr; /* five columns with center spacer */
-    align-items: center;
-    gap: 1rem;
-    margin: 0;
-    padding: 0 ;
-    width: 100%;
-    box-sizing: border-box;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto 1fr 1fr; /* five columns with center spacer */
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
-  
+
 /* center grid cells so text sits nicely in each column */
-  .nav-item { justify-self: center; }
+.nav-item {
+  justify-self: center;
+}
 
 .nav-item a {
   position: relative;
@@ -91,7 +93,7 @@
 
 /* Underline visible by default */
 .nav-item a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -4px;
@@ -100,7 +102,7 @@
   background: currentColor;
   transform-origin: left; /* shrink toward left to animate right->left */
   transform: scaleX(1);
-  transition: transform 260ms cubic-bezier(.2,.9,.3,1);
+  transition: transform 260ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
 /* On hover/focus remove underline with a right-to-left motion */
@@ -116,13 +118,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 9rem 1rem 0;
+  padding: 10rem 1rem 0;
 }
 
 .hero-title,
 .hero-subtitle {
   margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
   color: #fff;
   line-height: 0.9;
   text-align: center;
@@ -133,22 +136,32 @@
   font-size: clamp(40px, 14vw, 260px);
   opacity: 0;
   transform: translateY(36px);
-  animation: slideUpFade 1200ms cubic-bezier(.2,.9,.3,1) 700ms forwards;
+  animation: slideUpFade 1200ms cubic-bezier(0.2, 0.9, 0.3, 1) 700ms forwards;
   position: relative;
+}
+.hero-subtitle {
+  font-weight: 700;
+  font-size: clamp(38px, 12vw, 320px);
+  margin-top: 1.4rem;
+  opacity: 0;
+  transform: translateY(36px);
+  animation: slideUpFade 1400ms cubic-bezier(0.2, 0.9, 0.3, 1) 1100ms forwards;
+  max-width: 90%;
+  overflow-wrap: break-word;
+  white-space: nowrap;
 }
 
 /* wrap title + badge so badge can be positioned by CSS */
 .title-wrap {
   position: relative;
   display: inline-block;
-  left: -120px; /* same visual nudge as before */
+  left: -120px;
 }
-
 .badge {
   position: absolute;
-  left: calc(100% + 68px);
+  left: calc(100% + 50px);
   top: 6rem;
-  background: #E4ABEE;
+  background: #e4abee;
   color: #111;
   padding: 10px 32px;
   border-radius: 999px;
@@ -156,31 +169,83 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap; /* keep text on one line */
-  width: auto; /* size to content */
   opacity: 0;
-  transform: translateX(150px) scale(0.995);
-  animation: slideLeftFade 1200ms cubic-bezier(.2,.9,.3,1) 2500ms forwards;
+  transform: translateX(120px) scale(0.995);
+  animation: slideLeftFade 1200ms cubic-bezier(0.2, 0.9, 0.3, 1) 2100ms forwards;
   will-change: transform, opacity;
 }
 
 .badge .badge-arrow {
   position: absolute;
-  left: -14px;
+  left: -12px;
   top: 0;
   transform: translateY(-50%) rotate(-95deg);
   width: 18px;
   height: 16px;
   display: block;
-  color: #E4ABEE;
+  color: #e4abee;
 }
-.badge .badge-arrow svg, .badge .badge-arrow path { fill: currentColor; }
+.badge .badge-arrow svg,
+.badge .badge-arrow path {
+  fill: currentColor;
+}
 
-.badge span { display: inline-block; }
+.badge span {
+  display: inline-block;
+}
+
+/* subtitle badge row: centered under subtitle */
+.subtitle-wrap {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  margin-top: 0;
+}
+.badge-top {
+  background: #9ec3cb;
+  transform: translateY(40px) scale(0.995);
+  transform: translateX(-50%);
+  animation: slideUpFade 900ms cubic-bezier(0.2, 0.9, 0.3, 1) 4200ms forwards;
+  will-change: transform, opacity;
+  z-index: 65;
+  left: 0;
+  position: absolute;
+  top: 1.5rem;
+  left: -29rem;
+}
+
+.badge-bottom {
+  background: #ff887d;
+  transform: translateX(-50%);
+  transform: translateY(18px) scale(0.995);
+  animation: slideUpFade 900ms cubic-bezier(0.2, 0.9, 0.3, 1) 3200ms forwards;
+  will-change: transform, opacity;
+  z-index: 65;
+  position: absolute;
+  top: calc(100% + 12rem);
+  left: -4.5rem;
+}
+.badge-bottom.second {
+  animation-delay: 3950ms;
+}
+.badge-top .badge-arrow {
+  left: 8.7em;
+  top: -8px;
+  color: #9ec3cb;
+  transform: rotate(0deg);
+}
+.badge-bottom .badge-arrow {
+  left: 9.5rem;
+  top: -9px;
+  color: #ff887d;
+  transform: rotate(0deg);
+}
 
 @keyframes slideLeftFade {
   from {
     opacity: 0;
-    transform: translateX(150px) scale(0.995);
+    transform: translateX(120px) scale(0.995);
   }
   to {
     opacity: 1;
@@ -188,22 +253,10 @@
   }
 }
 
-.hero-subtitle {
-  font-weight: 700;
-  font-size: clamp(36px, 12vw, 320px);
-  margin-top: 0.3em;
-  opacity: 0;
-  transform: translateY(36px);
-  animation: slideUpFade 1400ms cubic-bezier(.2,.9,.3,1) 1100ms forwards;
-  max-width: 90%;
-  overflow-wrap: break-word;
-  white-space: nowrap; 
-}
-
 @keyframes slideUpFade {
   from {
     opacity: 0;
-    transform: translateY(30px) scale(0.995);
+    transform: translateY(90px) scale(0.995);
   }
   to {
     opacity: 1;
@@ -222,7 +275,9 @@
     width: 100%;
   }
 
-  .nav-item.empty a { display: none; }
+  .nav-item.empty a {
+    display: none;
+  }
 
   /* Ensure anchors are visible and easy to tap on small screens */
   .nav-item a {
@@ -242,5 +297,7 @@
 
 /* reset title nudge on medium/smaller viewports */
 @media (max-width: 900px) {
-  .title-wrap { left: 0; }
+  .title-wrap {
+    left: 0;
+  }
 }
