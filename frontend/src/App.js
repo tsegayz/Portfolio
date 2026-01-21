@@ -15,6 +15,51 @@ function App() {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
+const cursorRef = useRef(null);
+
+useEffect(() => {
+  const ball = cursorRef.current;
+  if (!ball) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ballX = mouseX;
+  let ballY = mouseY;
+  let isVisible = false;
+
+  const speed = 0.12; // lower = more bounce
+
+  function onMouseMove(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }
+
+  function onScroll() {
+    if (window.scrollY > 40 && !isVisible) {
+      ball.classList.add("visible");
+      isVisible = true;
+    }
+  }
+
+  function animate() {
+    ballX += (mouseX - ballX) * speed;
+    ballY += (mouseY - ballY) * speed;
+
+    ball.style.transform = `translate3d(${ballX}px, ${ballY}px, 0)`;
+
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("scroll", onScroll);
+
+  animate();
+
+  return () => {
+    window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("scroll", onScroll);
+  };
+}, []);
 
   useEffect(() => {
     function updatePosition() {
@@ -112,6 +157,8 @@ function App() {
             <span>UI/UX Designer</span>
           </div>
         </div>
+        <div className="cursor-ball" ref={cursorRef} />
+    
       </main>
     </div>
   );
