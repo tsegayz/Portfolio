@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import "./App.css";
+import proj1 from "./assets/images/sec1.jpg";
+import proj2 from "./assets/images/sec2.webp";
+import proj3 from "./assets/images/sec3.jpg";
 
 function App() {
   const navItems = [
@@ -15,51 +18,67 @@ function App() {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
-const cursorRef = useRef(null);
+  const cursorRef = useRef(null);
+  const items = [
+    {
+      id: 1,
+      title: "JOSAM",
+      image: proj1,
+    },
+    {
+      id: 2,
+      title: "AKERAY",
+      image:proj2,
+    },
+    {
+      id: 3,
+      title: "HEALTHCOLOGY",
+      image:proj3,
+    },
+  ];
+  useEffect(() => {
+    const ball = cursorRef.current;
+    if (!ball) return;
 
-useEffect(() => {
-  const ball = cursorRef.current;
-  if (!ball) return;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ballX = mouseX;
+    let ballY = mouseY;
+    let isVisible = false;
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ballX = mouseX;
-  let ballY = mouseY;
-  let isVisible = false;
+    const speed = 0.12; // lower = more bounce
 
-  const speed = 0.12; // lower = more bounce
-
-  function onMouseMove(e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  }
-
-  function onScroll() {
-    if (window.scrollY > 40 && !isVisible) {
-      ball.classList.add("visible");
-      isVisible = true;
+    function onMouseMove(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     }
-  }
 
-  function animate() {
-    ballX += (mouseX - ballX) * speed;
-    ballY += (mouseY - ballY) * speed;
+    function onScroll() {
+      if (window.scrollY > 40 && !isVisible) {
+        ball.classList.add("visible");
+        isVisible = true;
+      }
+    }
 
-    ball.style.transform = `translate3d(${ballX}px, ${ballY}px, 0)`;
+    function animate() {
+      ballX += (mouseX - ballX) * speed;
+      ballY += (mouseY - ballY) * speed;
 
-    requestAnimationFrame(animate);
-  }
+      ball.style.transform = `translate3d(${ballX}px, ${ballY}px, 0)`;
 
-  window.addEventListener("mousemove", onMouseMove);
-  window.addEventListener("scroll", onScroll);
+      requestAnimationFrame(animate);
+    }
 
-  animate();
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("scroll", onScroll);
 
-  return () => {
-    window.removeEventListener("mousemove", onMouseMove);
-    window.removeEventListener("scroll", onScroll);
-  };
-}, []);
+    animate();
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   useEffect(() => {
     function updatePosition() {
@@ -122,6 +141,10 @@ useEffect(() => {
         </nav>
       </header>
       <main className="hero" ref={heroRef}>
+        <div className="intro-text" >
+  👋 Hi Nice to meet you I am Tsega Yaekob
+</div>
+
         <div className="title-wrap">
           <h1 className="hero-title title-creative" ref={titleRef}>
             Creative
@@ -136,8 +159,8 @@ useEffect(() => {
           </div>
         </div>
         <h2 className="hero-subtitle title-designer" ref={subtitleRef}>
-            Designer
-          </h2>
+          Designer
+        </h2>
         <div className="subtitle-wrap">
           <div className="badge badge-top second">
             <FaLocationArrow
@@ -147,7 +170,7 @@ useEffect(() => {
             />
             <span>Developer</span>
           </div>
-          
+
           <div className="badge badge-bottom second">
             <FaLocationArrow
               className="badge-arrow"
@@ -158,7 +181,37 @@ useEffect(() => {
           </div>
         </div>
         <div className="cursor-ball" ref={cursorRef} />
-    
+        <section className="collaboration">
+          <div className="cards">
+            {items.map((item) => (
+              <article className="card" key={item.id}>
+                <div className="image-wrap">
+                  <img src={item.image} alt={item.title} />
+                </div>
+
+                <button className="card-btn">
+                  <span className="text-pill">{item.title}</span>
+                  <span className="arrow">↗</span>
+                </button>
+              </article>
+            ))}
+          </div>
+
+          <div className="content">
+            <h2>Collaboration</h2>
+            <p>
+              I believe in working closely with my clients throughout the
+              design process. My input and feedback are essential as we
+              co-create thoughtful, functional solutions that align with My
+              vision and objectives. From early discovery to final execution, I
+              prioritize open communication, transparency, and collaboration to
+              ensure every decision is intentional and impactful. By combining
+              my insights with my expertise, I deliver designs that are not
+              only visually compelling but also purposeful, scalable, and built
+              to perform in real-world contexts.
+            </p>
+          </div>
+        </section>
       </main>
     </div>
   );
