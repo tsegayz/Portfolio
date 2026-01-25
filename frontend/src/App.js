@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import "./App.css";
 import proj1 from "./assets/images/sec1.jpg";
@@ -19,6 +19,8 @@ function App() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const cursorRef = useRef(null);
+  const reelRef = useRef(null);
+
   const items = [
     {
       id: 1,
@@ -28,12 +30,12 @@ function App() {
     {
       id: 2,
       title: "AKERAY",
-      image:proj2,
+      image: proj2,
     },
     {
       id: 3,
       title: "HEALTHCOLOGY",
-      image:proj3,
+      image: proj3,
     },
   ];
   useEffect(() => {
@@ -78,6 +80,15 @@ function App() {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("scroll", onScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    const reel = reelRef.current;
+    const target = 5;
+    const itemHeight = 40; // MUST match CSS
+
+    // scroll to the target number
+    reel.style.transform = `translateY(-${target * itemHeight}px)`;
   }, []);
 
   useEffect(() => {
@@ -141,9 +152,9 @@ function App() {
         </nav>
       </header>
       <main className="hero" ref={heroRef}>
-        <div className="intro-text" >
-  👋 Hi Nice to meet you I am Tsega Yaekob
-</div>
+        <div className="intro-text">
+          👋 Hi Nice to meet you I am Tsega Yaekob
+        </div>
 
         <div className="title-wrap">
           <h1 className="hero-title title-creative" ref={titleRef}>
@@ -200,16 +211,87 @@ function App() {
           <div className="content">
             <h2>Collaboration</h2>
             <p>
-              I believe in working closely with my clients throughout the
-              design process. My input and feedback are essential as we
-              co-create thoughtful, functional solutions that align with My
-              vision and objectives. From early discovery to final execution, I
-              prioritize open communication, transparency, and collaboration to
-              ensure every decision is intentional and impactful. By combining
-              my insights with my expertise, I deliver designs that are not
-              only visually compelling but also purposeful, scalable, and built
-              to perform in real-world contexts.
+              I believe in working closely with my clients throughout the design
+              process. My input and feedback are essential as we co-create
+              thoughtful, functional solutions that align with My vision and
+              objectives. From early discovery to final execution, I prioritize
+              open communication, transparency, and collaboration to ensure
+              every decision is intentional and impactful. By combining my
+              insights with my expertise, I deliver designs that are not only
+              visually compelling but also purposeful, scalable, and built to
+              perform in real-world contexts.
             </p>
+          </div>
+        </section>
+        <section className="value-section">
+          <div className="value-container">
+            <div className="status-pill">
+              <span className="dot" />
+              Open to work
+            </div>
+
+            <h2 className="value-title">
+              Crafting Immersive <br />
+              Digital Experiences With <br />
+              Precision & Innovation
+            </h2>
+
+            <p className="value-description">
+              Hi! I’m Tsega. As a seasoned UI/UX Design Maestro, I bring a
+              wealth of experience and a relentless passion for crafting
+              immersive digital experiences that captivate audiences and drive
+              business growth. With expertise spanning user research,
+              interaction design, and visual aesthetics, I excel in translating
+              complex concepts into intuitive interfaces that resonate with
+              users.
+            </p>
+
+            <div className="value-actions">
+              <button className="btn-outline ripple-btn">
+                Hire Me <span className="hand">🤝</span>
+              </button>
+
+              <button className="btn-solid consume-btn">
+                <span className="btn-label">See my works</span>
+                <span className="icon-circle">
+                  <FaLocationArrow />
+                </span>
+              </button>
+            </div>
+
+            <div className="stats-card">
+              <div className="stat">
+                <span className="stat-label">CLIENTS</span>
+                <span className="stat-value one">2K+</span>
+              </div>
+
+              <div className="stat">
+                <span className="stat-label">PROJECTS</span>
+
+                <span className="stat-value">
+                  <span className="reel-window">
+                    <span className="reel" ref={reelRef}>
+                      {[0, 1, 2, 3, 4, 5].map((n) => (
+                        <span key={n} className="reel-item">
+                          {n}
+                        </span>
+                      ))}
+                    </span>
+                  </span>
+                  K
+                </span>
+              </div>
+
+              <div className="stat">
+                <span className="stat-label">HAPPY CLIENTS</span>
+                <span className="stat-value three">56</span>
+              </div>
+
+              <div className="stat">
+                <span className="stat-label">FOLLOWERS</span>
+                <span className="stat-value four">15K+</span>
+              </div>
+            </div>
           </div>
         </section>
       </main>
