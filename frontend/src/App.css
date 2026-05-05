@@ -57,7 +57,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr auto 1fr 1fr; /* five columns with center spacer */
   align-items: center;
-  gap: 1rem;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -79,16 +78,18 @@
   letter-spacing: 0.02em;
 }
 
-/* .nav-item.empty a {
-    display: inline-block;
-    width: 100%; 
-    height: 1rem;
-} */
+.nav-item.empty {
+  display: flex;
+  align-items: center; /* centers the span vertically within the cell */
+}
 
-.nav-item.empty a {
+.nav-item.empty span {
   display: inline-block;
-  width: 3.6rem; /* center s pacer that keeps the middle visually empty */
-  height: 1rem;
+  width: 4.6rem;
+  height: 2px;
+  margin: 0 4rem;
+  background: currentColor;
+  margin-top: 2.5rem; /* fine-tune this value until it sits right */
 }
 
 /* Underline visible by default */
@@ -111,6 +112,7 @@
   transform-origin: left;
   transform: scaleX(0);
 }
+
 
 /* Hero heading styles */
 .hero {

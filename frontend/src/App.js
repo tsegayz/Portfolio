@@ -5,16 +5,13 @@ import proj1 from "./assets/images/sec1.jpg";
 import proj2 from "./assets/images/sec2.webp";
 import proj3 from "./assets/images/sec3.jpg";
 
-function App() {
-  const navItems = [
-    "TSEGA YAEKOB",
-    "CONTACTS",
-    "", // middle empty item
-    "WORK",
-    "SOCIALS",
-  ];
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-  // refs for positioning subtitle relative to title
+import Work from "./Work";
+import Contacts from "./Contacts";
+import Socials from "./Socials";
+
+function Home() {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
@@ -132,171 +129,197 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="site-header">
-        <nav className="nav-bar" aria-label="Main navigation">
-          <ul className="nav-list">
-            {navItems.map((label, idx) => (
-              <li
-                key={idx}
-                className={`nav-item ${label === "" ? "empty" : ""}`}
-              >
-                {label === "" ? (
-                  <a href="#" aria-hidden="true"></a>
-                ) : (
-                  <a href="#">{label}</a>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
-      <main className="hero" ref={heroRef}>
-        <div className="intro-text">
-          👋 Hi Nice to meet you I am Tsega Yaekob
+    <main className="hero" ref={heroRef}>
+      <div className="intro-text">👋 Hi Nice to meet you I am Tsega Yaekob</div>
+
+      <div className="title-wrap">
+        <h1 className="hero-title title-creative" ref={titleRef}>
+          Creative
+        </h1>
+        <div className="badge">
+          <FaLocationArrow
+            className="badge-arrow"
+            aria-hidden="true"
+            focusable="false"
+          />
+          <span>Visual Designer</span>
+        </div>
+      </div>
+      <h2 className="hero-subtitle title-designer" ref={subtitleRef}>
+        Designer
+      </h2>
+      <div className="subtitle-wrap">
+        <div className="badge badge-top second">
+          <FaLocationArrow
+            className="badge-arrow"
+            aria-hidden="true"
+            focusable="false"
+          />
+          <span>Developer</span>
         </div>
 
-        <div className="title-wrap">
-          <h1 className="hero-title title-creative" ref={titleRef}>
-            Creative
-          </h1>
-          <div className="badge">
-            <FaLocationArrow
-              className="badge-arrow"
-              aria-hidden="true"
-              focusable="false"
-            />
-            <span>Visual Designer</span>
-          </div>
+        <div className="badge badge-bottom second">
+          <FaLocationArrow
+            className="badge-arrow"
+            aria-hidden="true"
+            focusable="false"
+          />
+          <span>UI/UX Designer</span>
         </div>
-        <h2 className="hero-subtitle title-designer" ref={subtitleRef}>
-          Designer
-        </h2>
-        <div className="subtitle-wrap">
-          <div className="badge badge-top second">
-            <FaLocationArrow
-              className="badge-arrow"
-              aria-hidden="true"
-              focusable="false"
-            />
-            <span>Developer</span>
-          </div>
-
-          <div className="badge badge-bottom second">
-            <FaLocationArrow
-              className="badge-arrow"
-              aria-hidden="true"
-              focusable="false"
-            />
-            <span>UI/UX Designer</span>
-          </div>
-        </div>
-        <div className="cursor-ball" ref={cursorRef} />
-        <section className="collaboration">
-          <div className="cards">
-            {items.map((item) => (
-              <article className="card" key={item.id}>
-                <div className="image-wrap">
-                  <img src={item.image} alt={item.title} />
-                </div>
-
-                <button className="card-btn">
-                  <span className="text-pill">{item.title}</span>
-                  <span className="arrow">↗</span>
-                </button>
-              </article>
-            ))}
-          </div>
-
-          <div className="content">
-            <h2>Collaboration</h2>
-            <p>
-              I believe in working closely with my clients throughout the design
-              process. My input and feedback are essential as we co-create
-              thoughtful, functional solutions that align with My vision and
-              objectives. From early discovery to final execution, I prioritize
-              open communication, transparency, and collaboration to ensure
-              every decision is intentional and impactful. By combining my
-              insights with my expertise, I deliver designs that are not only
-              visually compelling but also purposeful, scalable, and built to
-              perform in real-world contexts.
-            </p>
-          </div>
-        </section>
-        <section className="value-section">
-          <div className="value-container">
-            <div className="status-pill">
-              <span className="dot" />
-              Open to work
-            </div>
-
-            <h2 className="value-title">
-              Crafting Immersive <br />
-              Digital Experiences With <br />
-              Precision & Innovation
-            </h2>
-
-            <p className="value-description">
-              Hi! I’m Tsega. As a seasoned UI/UX Design Maestro, I bring a
-              wealth of experience and a relentless passion for crafting
-              immersive digital experiences that captivate audiences and drive
-              business growth. With expertise spanning user research,
-              interaction design, and visual aesthetics, I excel in translating
-              complex concepts into intuitive interfaces that resonate with
-              users.
-            </p>
-
-            <div className="value-actions">
-              <button className="btn-outline ripple-btn">
-                Hire Me <span className="hand">🤝</span>
-              </button>
-
-              <button className="btn-solid consume-btn">
-                <span className="btn-label">See my works</span>
-                <span className="icon-circle">
-                  <FaLocationArrow />
-                </span>
-              </button>
-            </div>
-
-            <div className="stats-card">
-              <div className="stat">
-                <span className="stat-label">CLIENTS</span>
-                <span className="stat-value one">2K+</span>
+      </div>
+      <div className="cursor-ball" ref={cursorRef} />
+      <section className="collaboration">
+        <div className="cards">
+          {items.map((item) => (
+            <article className="card" key={item.id}>
+              <div className="image-wrap">
+                <img src={item.image} alt={item.title} />
               </div>
 
-              <div className="stat">
-                <span className="stat-label">PROJECTS</span>
+              <button className="card-btn">
+                <span className="text-pill">{item.title}</span>
+                <span className="arrow">↗</span>
+              </button>
+            </article>
+          ))}
+        </div>
 
-                <span className="stat-value">
-                  <span className="reel-window">
-                    <span className="reel" ref={reelRef}>
-                      {[0, 1, 2, 3, 4, 5].map((n) => (
-                        <span key={n} className="reel-item">
-                          {n}
-                        </span>
-                      ))}
-                    </span>
+        <div className="content">
+          <h2>Collaboration</h2>
+          <p>
+            I believe in working closely with my clients throughout the design
+            process. My input and feedback are essential as we co-create
+            thoughtful, functional solutions that align with My vision and
+            objectives. From early discovery to final execution, I prioritize
+            open communication, transparency, and collaboration to ensure every
+            decision is intentional and impactful. By combining my insights with
+            my expertise, I deliver designs that are not only visually
+            compelling but also purposeful, scalable, and built to perform in
+            real-world contexts.
+          </p>
+        </div>
+      </section>
+      <section className="value-section">
+        <div className="value-container">
+          <div className="status-pill">
+            <span className="dot" />
+            Open to work
+          </div>
+
+          <h2 className="value-title">
+            Crafting Immersive <br />
+            Digital Experiences With <br />
+            Precision & Innovation
+          </h2>
+
+          <p className="value-description">
+            Hi! I’m Tsega. As a seasoned UI/UX Design Maestro, I bring a wealth
+            of experience and a relentless passion for crafting immersive
+            digital experiences that captivate audiences and drive business
+            growth. With expertise spanning user research, interaction design,
+            and visual aesthetics, I excel in translating complex concepts into
+            intuitive interfaces that resonate with users.
+          </p>
+
+          <div className="value-actions">
+            <button className="btn-outline ripple-btn">
+              Hire Me <span className="hand">🤝</span>
+            </button>
+            <button className="btn-solid consume-btn">
+              <span className="btn-label">See my works</span>
+              <span className="icon-circle">
+                <FaLocationArrow />
+              </span>
+            </button>
+          </div>
+          <div className="stats-card">
+            <div className="stat">
+              <span className="stat-label">CLIENTS</span>
+              <span className="stat-value one">2K+</span>
+            </div>
+            <div className="stat">
+              <span className="stat-label">PROJECTS</span>
+              <span className="stat-value">
+                <span className="reel-window">
+                  <span className="reel" ref={reelRef}>
+                    {[0, 1, 2, 3, 4, 5].map((n) => (
+                      <span key={n} className="reel-item">
+                        {n}
+                      </span>
+                    ))}
                   </span>
-                  K
                 </span>
-              </div>
-
-              <div className="stat">
-                <span className="stat-label">HAPPY CLIENTS</span>
-                <span className="stat-value three">56</span>
-              </div>
-
-              <div className="stat">
-                <span className="stat-label">FOLLOWERS</span>
-                <span className="stat-value four">15K+</span>
-              </div>
+                K
+              </span>
+            </div>
+            <div className="stat">
+              <span className="stat-label">HAPPY CLIENTS</span>
+              <span className="stat-value three">56</span>
+            </div>
+            <div className="stat">
+              <span className="stat-label">FOLLOWERS</span>
+              <span className="stat-value four">15K+</span>
             </div>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+      <section>
+        <div className="footer-card">
+          <h2>Let’s build something great together.</h2>
+          <button className="btn-solid consume-btn">
+            <span className="btn-label">Contact Me</span>
+            <span className="icon-circle">
+              <FaLocationArrow />
+            </span>
+          </button>
+        </div>
+
+        <div>
+          
+        </div>
+      </section>
+    </main>
   );
 }
 
-export default App;
+export default function App() {
+  const navItems = [
+    { id: "home", label: "TSEGA YAEKOB", path: "/" },
+    { id: "contacts", label: "CONTACTS", path: "/contacts" },
+    { id: "spacer", label: "" },
+    { id: "work", label: "WORK", path: "/work" },
+    { id: "socials", label: "SOCIALS", path: "/socials" },
+  ];
+
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <header className="site-header">
+          <nav className="nav-bar">
+            <ul className="nav-list">
+              {navItems.map((item) => (
+                <li
+                  key={item.id}
+                  className={`nav-item ${item.label === "" ? "empty" : ""}`}
+                >
+                  {item.label ? (
+                    <Link to={item.path}>{item.label}</Link>
+                  ) : (
+                    <span />
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </header>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/work" element={<Work />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/socials" element={<Socials />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
