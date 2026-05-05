@@ -72,6 +72,23 @@ function Home() {
       label: "+251-938-959-856",
     },
   ];
+  const projects = [
+    { id: 1, title: "EFFOYTA", image: proj1, rotate: "-8deg", delay: "0s" },
+    {
+      id: 2,
+      title: "ARDITRAVEL",
+      image: proj2,
+      rotate: "-2deg",
+      delay: "1s",
+    },
+    {
+      id: 3,
+      title: "VINEVERDICT",
+      image: proj3,
+      rotate: "4deg",
+      delay: "2s",
+    },
+  ];
   useEffect(() => {
     const ball = cursorRef.current;
     if (!ball) return;
@@ -298,6 +315,29 @@ function Home() {
               <span className="stat-value four">15K+</span>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="showcase-section">
+        <div className="showcase-text">
+          <h2>
+            I create <span className="highlight">unconventional</span> yet
+            functional & visually pleasing interfaces for mobile and web.
+          </h2>
+        </div>
+
+        <div className="showcase-cards">
+          {projects.map((p) => (
+            <div
+              key={p.id}
+              className="showcase-card"
+              style={{ "--rotate": p.rotate, "--delay": p.delay }}
+            >
+              <div className="showcase-img-wrap">
+                <img src={p.image} alt={p.title} />
+              </div>
+              <span className="showcase-label">{p.title}</span>
+            </div>
+          ))}
         </div>
       </section>
       <section className="footer-section">

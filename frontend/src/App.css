@@ -59,8 +59,8 @@
   align-items: center;
   margin: 0 auto;
   padding: 0;
-  width: 100%; 
-  max-width: 1680px; 
+  width: 100%;
+  max-width: 1680px;
   box-sizing: border-box;
 }
 
@@ -114,7 +114,6 @@
   transform: scaleX(0);
 }
 
-
 /* Hero heading styles */
 .hero {
   display: flex;
@@ -147,8 +146,14 @@
 .hero-title,
 .hero-subtitle {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
   color: #fff;
   line-height: 0.9;
   text-align: center;
@@ -349,7 +354,7 @@
   align-items: center;
   padding: 6px;
   gap: 10px;
-  background:transparent;
+  background: transparent;
   font-size: 16px;
   cursor: pointer;
   border: none;
@@ -366,11 +371,10 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: #E4ABEE;
+  background: #e4abee;
   transform: scaleY(0);
   transform-origin: bottom;
-  transition: transform 0.75s
-    cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: -1;
 }
 
@@ -434,7 +438,7 @@
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   font-size: 0.9rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .status-pill .dot {
@@ -605,11 +609,10 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
-.stat{
+.stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 .stat-label {
   font-size: 18px;
@@ -652,20 +655,132 @@
 
 .reel-item {
   display: block;
-  height: 4rem; 
+  height: 4rem;
   line-height: 5rem;
 }
+/* //////  section-showcase /////// */
 
+.showcase-section {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20rem;
+  padding: 6rem 0rem;
+}
 
+.showcase-text {
+  flex: 0 0 320px;
+  align-self: center;
+}
+
+.showcase-text h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: start;
+  color: inherit;
+  font-size: clamp(36px, 5vw, 54px);
+  line-height: 1.15;
+  font-weight: 300;
+}
+
+.showcase-text .highlight {
+  color: #e05a3a;
+}
+
+.showcase-cards {
+  position: relative;
+  flex: 0 0 700px;
+  height: 600px;
+}
+
+.showcase-card {
+  position: absolute;
+  width: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  transform: translateX(120%) rotate(var(--rotate));
+  opacity: 0;
+  animation: slideInCard 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; /* was 0.7s */
+  animation-delay: var(--delay);
+
+}
+.showcase-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes slideInCard {
+  to {
+    transform: translateX(0) rotate(var(--rotate));
+    opacity: 1;
+  }
+}
+
+/* descending z-index — first card on top */
+.showcase-card:nth-child(1) {
+  left: 0;
+  top: 0px;
+  z-index: 1;
+}
+.showcase-card:nth-child(2) {
+  left: 140px;
+  top: 40px;
+  z-index: 2;
+}
+.showcase-card:nth-child(3) {
+  left: 300px;
+  top: 80px;
+  z-index: 3;
+}
+
+.showcase-img-wrap {
+  width: 100%;
+  height: 600px; /* taller images */
+}
+
+.showcase-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.showcase-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 25%;
+  transform: translateX(-50%);
+  color: black;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  z-index: 2;
+  padding: 10px 30px;
+  background: #fff;
+  white-space: nowrap;
+}
 /*  footer css section */
 .footer-section {
   padding: 5rem 2rem 2rem;
   text-align: center;
-  width: 100%;
+  width: 98%;
 }
 
 .footer-tag {
-  color: #E4ABEE;
+  color: #e4abee;
   font-size: 1.45rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -697,7 +812,7 @@
 }
 
 .footer-contact-item svg {
-  color: #E4ABEE; /* purple icon */
+  color: #e4abee; /* purple icon */
   font-size: 1.6rem;
 }
 
@@ -707,7 +822,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 12rem;
   margin-bottom: 5rem;
-  width: 82%; /* adjust this */
+  width: 82%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -754,10 +869,6 @@
   margin: 0;
 }
 
-
-
-
-
 @keyframes scrollUp {
   from {
     transform: translateY(40%);
@@ -775,7 +886,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 
 @keyframes slideLeftFade {
   from {
